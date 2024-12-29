@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  // Pre-save hook for password hashing
+  userSchema.pre("save", async function (next) {
+  
+  
+    // Check if the password field has been modified
+    if (!this.isModified("password")) {
+      return next(); // Skip re-hashing the password
+    }
+  
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+    next();
+  });
+</body>
+</html>
