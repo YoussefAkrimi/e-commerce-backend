@@ -21,6 +21,7 @@ const customerRoute = require("./routes/customerRoute");
 const commandeRoute = require("./routes/commandeRoute");
 const factureRoute = require("./routes/factureRoute");
 const orderRoute = require("./routes/orderRoute");
+const paymentRoute = require("./routes/paymentRoute");
 
 const connectDB = require("./database"); // Make sure database.js is properly set up
 connectDB(); // Connect to the database
@@ -31,6 +32,7 @@ app.use("/verification", express.static(path.join(__dirname, "verification")));
 app.use("/storage", express.static(path.join(__dirname, "storage")));
 
 // Set up routes
+app.use("/payment", paymentRoute); // Add the payment route here
 app.use("/categories", categoryRoute); // Route for categories
 app.use("/subCategories", subCategoryRoute); // Route for subcategories
 app.use("/product", productRoute);
